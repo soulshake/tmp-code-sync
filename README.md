@@ -2,7 +2,14 @@
 
 Run `convox start` and modify a file within `./subdir/foo` (which is present in `.dockerignore`).
 
+**Expected behavior**: Changes to files in `subdir/` should sync. Changes to files in `subdir/foo/` should **not** sync.
+
+**Actual behavior**: Changes to files in `subdir/foo/` are synced by Convox.
+
 ```
+$ cat .dockerignore 
+subdir/foo
+
 $ convox start
 build  │ running: docker build -f /home/aj/git/convox/support/code-sync/Dockerfile -t code-sync/test /home/aj/git/convox/support/code-sync
 build  │ Sending build context to Docker daemon  47.1 kB
